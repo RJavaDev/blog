@@ -16,7 +16,13 @@
 <body>
 <div class="container mx-auto md:px-6">
     <div class="my-2">
-        <a th:href="@{/blog/add}"  class="underline hover:text-blue-600" style="cursor: pointer">addb log</a>
+        <button
+                type="button"
+                class="inline-block mt-auto rounded-full border-2 border-success px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-success transition duration-150 ease-in-out hover:border-success-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-success-600 focus:border-success-600 focus:text-success-600 focus:outline-none focus:ring-0 active:border-success-700 active:text-success-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                data-te-ripple-init>
+            <a th:href="@{/blog/add}"  class="underline hover:text-blue-600" style="cursor: pointer">add blog</a>
+        </button>
+
     </div>
     <div class="flex flex-col">
         <div class="overflow-x-auto">
@@ -28,11 +34,8 @@
                             <th scope="col">#</th>
                             <th scope="col">Title</th>
                             <th scope="col">Topic</th>
-                            <th scope="col">Text</th>
                             <th scope="col">Number Of Readings</th>
                             <th scope="col">checked</th>
-                            <th scope="col">Created At</th>
-                            <th scope="col">Updated At</th>
                             <th scope="col">Action</th>
                         </tr>
                         </thead>
@@ -41,14 +44,17 @@
                             <td class="whitespace-nowrap font-medium" th:text="${item.getId()}"></td>
                             <td class="whitespace-nowrap" th:text="${item.getTitle()}"></td>
                             <td class="whitespace-nowrap" th:text="${item.getTopic()}"></td>
-                            <td class="whitespace-nowrap" th:text="${item.getText()}"></td>
                             <td class="whitespace-nowrap" th:text="${item.getNumberOfReadings()}"></td>
                             <td class="whitespace-nowrap" th:text="${item.isChecked()}"></td>
-                            <td class="whitespace-nowrap" th:text="${item.getCreatedDate()}"></td>
-                            <td class="whitespace-nowrap" th:text="${item.getUpdatedDate()}"></td>
                             <td class="whitespace-nowrap">
-<!--                                <a th:href="@{/incoming-product/edit/{id}(id=${incomingProductItem.getId()})}"-->
-<!--                                   class="underline mr-1 hover:text-blue-600">edit</a>-->
+                                <button
+                                        type="button"
+                                        class="inline-block mt-auto rounded-full border-2 border-success px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-success transition duration-150 ease-in-out hover:border-success-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-success-600 focus:border-success-600 focus:text-success-600 focus:outline-none focus:ring-0 active:border-success-700 active:text-success-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                                        data-te-ripple-init>
+                                    <a th:href="@{/blog/get/{id}(id=${item.getId()})}"
+                                       class="underline mr-1 hover:text-blue-600">SHOW</a>
+                                </button>
+
                             </td>
                         </tr>
                         </tbody>

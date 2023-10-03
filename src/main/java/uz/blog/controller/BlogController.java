@@ -2,7 +2,6 @@ package uz.blog.controller;
 
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,33 +41,33 @@ public class BlogController {
 
 //    @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     @PostMapping("/add")
-    public ModelAndView addBlog(@ModelAttribute @Validated BlogCreatedRequestDto dto, ModelAndView view) {
+    public String addBlog(@ModelAttribute @Validated BlogCreatedRequestDto dto, Model model) {
         BlogEntity blogEntity = BlogConvert.convertToEntity(dto);
         boolean add = service.add(blogEntity);
-        view.addObject("isSuccess", add);
-        view.setViewName("index");
-        return view;
+        model.addAttribute("isSuccess", add);
+        return "redirect:/blog";
     }
 
     @GetMapping("/get/{id}")
     public ModelAndView getBlogById(@PathVariable Integer id, ModelAndView view) {
+
         BlogEntity blogDB = service.getObject(id);
         BlogResponseDto blogResponseDto = BlogConvert.from(blogDB);
         view.addObject("blog", blogResponseDto);
-        view.setViewName("blog");
+        view.setViewName("blog-show");
 
         return view;
     }
 
-    @PostMapping("/checked/{id}")
+    @GetMapping("/checked/{id}")
     public ModelAndView checkedBlog(@PathVariable Integer id, ModelAndView view) {
 
         service.checkedBlog(id);
-        view.setViewName("index");
+        view.setViewName("redirect:/blog/get/"+id);
         return view;
     }
 
-    @DeleteMapping("/deleted/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteBlog(@PathVariable Integer id){
 
         service.delete(id);

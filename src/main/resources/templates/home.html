@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="eng"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Product</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap"
+            rel="stylesheet" />
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
+    <script src="https://cdn.tailwindcss.com/3.3.0"></script>
+</head>
+<body>
+
+<button
+        type="button"
+        class="inline-block rounded-full border-2 border-success px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-success transition duration-150 ease-in-out hover:border-success-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-success-600 focus:border-success-600 focus:text-success-600 focus:outline-none focus:ring-0 active:border-success-700 active:text-success-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+        data-te-ripple-init>
+    <a th:href="@{/blog}">BLOGS</a>
+</button>
+
+<button
+        type="button"
+        class="inline-block mt-auto rounded-full border-2 border-success px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-success transition duration-150 ease-in-out hover:border-success-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-success-600 focus:border-success-600 focus:text-success-600 focus:outline-none focus:ring-0 active:border-success-700 active:text-success-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+        data-te-ripple-init>
+    <a th:href="@{/account}">ACCOUNT</a>
+</button>
+
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            fontFamily: {
+                sans: ["Roboto", "sans-serif"],
+                body: ["Roboto", "sans-serif"],
+                mono: ["ui-monospace", "monospace"],
+            },
+        },
+        corePlugins: {
+            preflight: false,
+        },
+    };
+    import {
+        Ripple,
+        initTE,
+    } from "tw-elements";
+
+    initTE({ Ripple });
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="eng"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+
+    <title>Product</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap"
+            rel="stylesheet" />
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
+    <script src="https://cdn.tailwindcss.com/3.3.0"></script>
+</head>
+<style>
+    a{text-decoration: none}
+</style>
+<body>
+<div sec:authorize="hasRole('USER')">Text visible to user.</div>
+<div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
+<div
+        style="width: 70%;"
+        class="block m-auto " >
+    <div style="position: absolute; width: 70%;"
+        class="block rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] " >
+
+    <h1 style="font-size: 30px;"
+            class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50"
+        th:text="${blog.getTitle()}">
+        </h1>
+        <h1 style="font-size: 20px"
+            class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50"
+        th:text="${blog.getTopic()}">
+        </h1>
+        <h1 style="font-size: 15px; position: absolute; right: 20px; top: 20px"
+
+            class="mb-2 text-xl text-right "
+            th:text="${blog.getCreatedDate()}">
+        </h1>
+        <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200"
+           th:text="${blog.getText()}">
+        </p>
+        <button
+                type="button"
+                class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                data-te-ripple-init
+                data-te-ripple-color="light">
+            Comment
+        </button>
+
+        <button sec:authorize="hasRole('ADMIN')"
+                type="button"
+                class="inline-block rounded-full border-2 border-success px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-success transition duration-150 ease-in-out hover:border-success-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-success-600 focus:border-success-600 focus:text-success-600 focus:outline-none focus:ring-0 active:border-success-700 active:text-success-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                data-te-ripple-init>
+            <a th:href="@{/blog/checked/{id}(id=${blog.getId()})}"
+               class="button underline mr-1 hover:text-blue-600">Checked</a>
+        </button>
+
+        <button style="font-size: 15px; position: absolute; right:260px; bottom: 25px;"
+                type="submit"
+                class="inline-block rounded border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                data-te-ripple-init>
+            <a th:href="@{/blog/delete/{id}(id=${blog.getId()})}"
+               class="button underline mr-1 hover:text-blue-600">Delete</a>
+        </button>
+
+        <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200" style="font-size: 15px; position: absolute; right: 100px; bottom: 20px">
+            approved <b th:text="${blog.isChecked()}"></b>
+        </p>
+        <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200" style="font-size: 15px; position: absolute; right: 20px; bottom: 20px">
+            reads <b th:text="${blog.getNumberOfReadings()}"></b>
+        </p>
+    </div>
+
+</div>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            fontFamily: {
+                sans: ["Roboto", "sans-serif"],
+                body: ["Roboto", "sans-serif"],
+                mono: ["ui-monospace", "monospace"],
+            },
+        },
+        corePlugins: {
+            preflight: false,
+        },
+    };
+</script>
+</body>
+</html>

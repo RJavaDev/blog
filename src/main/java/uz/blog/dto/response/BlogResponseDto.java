@@ -14,7 +14,7 @@ public class BlogResponseDto extends BaseServerModifierDto {
 
     private String text;
 
-    private Integer numberOfReadings;
+    private long numberOfReadings;
 
     private boolean checked;
 

@@ -23,7 +23,7 @@ public class BlogEntity extends BaseServerModifierEntity {
     @Column(columnDefinition = "TEXT")
     private String text;
 
-    private Integer numberOfReadings;
+    private long numberOfReadings;
 
     private boolean checked;
 

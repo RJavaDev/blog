@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="eng"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+
+  <title>Product</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap"
+          rel="stylesheet" />
+  <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
+  <script src="https://cdn.tailwindcss.com/3.3.0"></script>
+</head>
+<body>
+<div
+        class="block w-full m-auto max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+  <ul class="w-full">
+    <li
+            class="w-full border-b-2 border-neutral-100 border-opacity-100 px-4 py-3 dark:border-opacity-50"
+     ><b>First Name</b> <span th:text="${user.getFirstname()}"></span>
+    </li>
+    <li
+            class="w-full border-b-2 border-neutral-100 border-opacity-100 px-4 py-3 dark:border-opacity-50">
+      <b>Phone Number </b> <span th:text="${user.getPhoneNumber()}"></span>
+    </li>
+    <li
+            class="w-full border-b-2 border-neutral-100 border-opacity-100 px-4 py-3 dark:border-opacity-50">
+      <b>Username</b> <span th:text="${user.getUsername()}"></span>
+    </li>
+
+    <li
+            class="w-full border-b-2 border-neutral-100 border-opacity-100 px-4 py-3 dark:border-opacity-50">
+      <b>Role </b> <span th:text="${user.getRoleEnumList()}"></span>
+    </li>
+  </ul>
+</div>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      fontFamily: {
+        sans: ["Roboto", "sans-serif"],
+        body: ["Roboto", "sans-serif"],
+        mono: ["ui-monospace", "monospace"],
+      },
+    },
+    corePlugins: {
+      preflight: false,
+    },
+  };
+</script>
+</body>
+</html>

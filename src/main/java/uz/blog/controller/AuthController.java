@@ -19,12 +19,6 @@ public class AuthController {
 
     private final UserService userService;
 
-    @GetMapping("/")
-    public ModelAndView home(ModelAndView modelAndView){
-        modelAndView.setViewName("index");
-        return modelAndView;
-    }
-
     @GetMapping("/register")
     public ModelAndView register(ModelAndView modelAndView) {
         modelAndView.setViewName("login");
