@@ -1,6 +1,9 @@
 package uz.blog.constants;
 
 public interface TableNames {
-    String DEPARTMENT_USER = "blog_user";
+    String BLOG_USER = "blog_user";
 
+    String BLOG = "blog";
+
+    String BLOG_COMMENT = "blog_comment";
 }

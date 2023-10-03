@@ -21,7 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = TableNames.DEPARTMENT_USER)
+@Table(name = TableNames.BLOG_USER)
 public class UserEntity extends BaseServerModifierEntity implements UserDetails {
 
     private String firstname;

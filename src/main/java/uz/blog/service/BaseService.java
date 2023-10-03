@@ -4,8 +4,9 @@ public interface BaseService<R,T>{
 
     R add(T t);
 
-    boolean delete(int id);
+    R getObject(Integer id);
 
+    boolean delete(int id);
 
     boolean update(int id,T t);
 

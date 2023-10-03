@@ -28,6 +28,11 @@ public class UserService implements BaseService<UserEntity, UserRequestDto> {
     }
 
     @Override
+    public UserEntity getObject(Integer id) {
+        return null;
+    }
+
+    @Override
     public boolean delete(int id) {
         UserEntity user = userRepository.findById(id).orElseThrow(
                 () -> new RecordNotFountException(id + " no user found for this ID")

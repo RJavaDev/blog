@@ -6,7 +6,10 @@
 </head>
 <body>
 <h1>
-    HALLO ADMIN
+    HALLO ADMIN <p th:text = "${user.getFirstname()}"></p>
 </h1>
+<p th:text="${user.getId()}"></p>
+<p th:text="${user.getUsername()}"></p>
+<p th:text="${user.getPhoneNumber()}"></p>
 </body>
 </html>
