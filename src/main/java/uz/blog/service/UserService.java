@@ -7,6 +7,8 @@ import uz.blog.entity.UserEntity;
 import uz.blog.exception.RecordNotFountException;
 import uz.blog.dto.UserRequestDto;
 import uz.blog.repository.UserRepository;
+import uz.blog.service.Base.BaseService;
+
 import java.util.Optional;
 
 @Service
@@ -16,7 +18,7 @@ public class UserService implements BaseService<UserEntity, UserRequestDto> {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public UserEntity add(UserRequestDto userRequestDto) {
+    public boolean add(UserRequestDto userRequestDto) {
         Optional<UserEntity> optionalUserEntity = userRepository.findByUsername(userRequestDto.getUsername());
         if (optionalUserEntity.isPresent()) {
             throw new RecordNotFountException(userRequestDto.getUsername() + " there is a user at this email address");
@@ -24,7 +26,8 @@ public class UserService implements BaseService<UserEntity, UserRequestDto> {
         UserEntity user = UserEntity.of(userRequestDto);
         user.forCreate();
         user.setPassword(passwordEncoder.encode(userRequestDto.getPassword()));
-        return userRepository.save(user);
+        userRepository.save(user);
+        return true;
     }
 
     @Override

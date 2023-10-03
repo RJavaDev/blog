@@ -36,9 +36,7 @@ public class AuthController {
             @ModelAttribute UserRequestDto userRequestDto,
             ModelAndView modelAndView
     ) {
-        modelAndView.addObject(
-                "user", userService.add(userRequestDto) != null ? userRequestDto : "ERROR"
-        );
+        modelAndView.addObject("user", userService.add(userRequestDto));
         modelAndView.setViewName("index");
         return modelAndView;
     }

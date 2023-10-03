@@ -17,7 +17,7 @@ import uz.blog.entity.base.BaseServerModifierEntity;
 public class Comment extends BaseServerModifierEntity {
 
     @ManyToOne
-    private Blog blog;
+    private BlogEntity blog;
 
     @Column(length = 400)
     private String comment;

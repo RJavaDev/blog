@@ -2,39 +2,41 @@ package uz.blog.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uz.blog.entity.Blog;
+import uz.blog.dto.request.BlogCreatedRequestDto;
+import uz.blog.dto.response.BlogResponseDto;
+import uz.blog.entity.BlogEntity;
 import uz.blog.repository.BlogRepository;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class BlogService implements BaseService<Blog,Integer>{
+public class BlogService{
 
 
     private final BlogRepository repository;
 
-    @Override
-    public Blog add(Integer integer) {
+    public boolean add(BlogCreatedRequestDto integer) {
+        return false;
+    }
+
+    public BlogResponseDto getObject(Integer id) {
         return null;
     }
 
-    @Override
-    public Blog getObject(Integer id) {
-        return null;
-    }
-
-    @Override
     public boolean delete(int id) {
         return false;
     }
 
-    @Override
-    public boolean update(int id, Integer integer) {
+    public boolean update(int id, BlogEntity blogEntity) {
         return false;
     }
 
-    public List<Blog> getAllBlog() {
+    public List<BlogEntity> getAllBlog() {
         return repository.getAllBlog();
+    }
+
+    public void checkedBlog(Integer id) {
+
     }
 }

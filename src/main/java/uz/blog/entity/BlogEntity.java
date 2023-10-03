@@ -13,7 +13,7 @@ import uz.blog.entity.base.BaseServerModifierEntity;
 @Setter
 @Entity
 @Table(name = TableNames.BLOG)
-public class Blog extends BaseServerModifierEntity {
+public class BlogEntity extends BaseServerModifierEntity {
 
     private String title;
 
