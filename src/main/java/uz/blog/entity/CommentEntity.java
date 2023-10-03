@@ -7,6 +7,8 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import uz.blog.constants.TableNames;
+import uz.blog.dto.response.BlogResponseDto;
+import uz.blog.dto.response.CommentResponseDto;
 import uz.blog.entity.base.BaseServerModifierEntity;
 
 
@@ -14,7 +16,7 @@ import uz.blog.entity.base.BaseServerModifierEntity;
 @Setter
 @Entity
 @Table(name = TableNames.BLOG_COMMENT)
-public class Comment extends BaseServerModifierEntity {
+public class CommentEntity extends BaseServerModifierEntity {
 
     @ManyToOne
     private BlogEntity blog;
@@ -27,5 +29,9 @@ public class Comment extends BaseServerModifierEntity {
     private Integer notUseful;
 
     private boolean checked;
+
+    public CommentResponseDto toDto(String... ignoreProperties){
+        return toDto(this, new CommentResponseDto(), ignoreProperties);
+    }
 
 }

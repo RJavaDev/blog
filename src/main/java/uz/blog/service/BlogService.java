@@ -2,33 +2,44 @@ package uz.blog.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uz.blog.dto.request.BlogCreatedRequestDto;
-import uz.blog.dto.response.BlogResponseDto;
+import org.springframework.transaction.annotation.Transactional;
 import uz.blog.entity.BlogEntity;
 import uz.blog.repository.BlogRepository;
+import uz.blog.utils.SecurityUtils;
+import uz.blog.validation.CommonSchemaValidation;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class BlogService{
+public class BlogService {
 
 
     private final BlogRepository repository;
 
-    public boolean add(BlogCreatedRequestDto integer) {
-        return false;
+    private final CommonSchemaValidation validation;
+
+    public boolean add(BlogEntity newBlog) {
+        Integer userId = SecurityUtils.getUserId();
+        newBlog.forCreate(userId);
+        repository.save(newBlog);
+        return true;
     }
 
-    public BlogResponseDto getObject(Integer id) {
-        return null;
+    @Transactional
+    public BlogEntity getObject(Integer id) {
+
+        repository.incrementNumberReadings(id);
+        return repository.getBlogById(id).orElseThrow(() -> {
+            throw new NullPointerException(id + " not found");
+        });
+
     }
 
-    public boolean delete(int id) {
-        return false;
-    }
-
-    public boolean update(int id, BlogEntity blogEntity) {
+    @Transactional
+    public boolean delete(Integer id) {
+        validation.existsById(id);
+        repository.deleteBlogById(id);
         return false;
     }
 
@@ -36,7 +47,9 @@ public class BlogService{
         return repository.getAllBlog();
     }
 
+    @Transactional
     public void checkedBlog(Integer id) {
-
+        validation.existsById(id);
+        repository.checkedBlog(id);
     }
 }

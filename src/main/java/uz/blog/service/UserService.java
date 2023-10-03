@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import uz.blog.entity.UserEntity;
-import uz.blog.exception.RecordNotFountException;
+import uz.blog.common.exception.RecordNotFountException;
 import uz.blog.dto.UserRequestDto;
 import uz.blog.repository.UserRepository;
 import uz.blog.service.Base.BaseService;

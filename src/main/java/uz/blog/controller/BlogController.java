@@ -2,9 +2,14 @@ package uz.blog.controller;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import uz.blog.controller.convert.BlogConvert;
 import uz.blog.dto.response.BlogResponseDto;
 import uz.blog.entity.BlogEntity;
 import uz.blog.service.BlogService;
@@ -12,25 +17,34 @@ import uz.blog.dto.request.BlogCreatedRequestDto;
 
 import java.util.List;
 
+
 @Controller
 @RequiredArgsConstructor
+@EnableMethodSecurity
 @RequestMapping("/blog")
 public class BlogController {
 
     private final BlogService service;
 
-    @GetMapping("")
-    public ModelAndView getAllBlog(ModelAndView view) {
+    @GetMapping()
+    public String getAllBlog(Model model) {
 
         List<BlogEntity> blogEntityList = service.getAllBlog();
-        view.addObject("allBlog", blogEntityList);
-
-        return view;
+        List<BlogResponseDto> blogResponseDtoList = BlogConvert.from(blogEntityList);
+        model.addAttribute("blogs", blogResponseDtoList);
+        return "index";
     }
 
+    @GetMapping("/add")
+    public String add() {
+        return "add-blog";
+    }
+
+//    @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     @PostMapping("/add")
-    public ModelAndView addBlog(@ModelAttribute BlogCreatedRequestDto dto, ModelAndView view) {
-        boolean add = service.add(dto);
+    public ModelAndView addBlog(@ModelAttribute @Validated BlogCreatedRequestDto dto, ModelAndView view) {
+        BlogEntity blogEntity = BlogConvert.convertToEntity(dto);
+        boolean add = service.add(blogEntity);
         view.addObject("isSuccess", add);
         view.setViewName("index");
         return view;
@@ -38,7 +52,8 @@ public class BlogController {
 
     @GetMapping("/get/{id}")
     public ModelAndView getBlogById(@PathVariable Integer id, ModelAndView view) {
-        BlogResponseDto blogResponseDto = service.getObject(id);
+        BlogEntity blogDB = service.getObject(id);
+        BlogResponseDto blogResponseDto = BlogConvert.from(blogDB);
         view.addObject("blog", blogResponseDto);
         view.setViewName("blog");
 

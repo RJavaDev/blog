@@ -1,4 +1,4 @@
-package uz.blog.exception;
+package uz.blog.common.exception;
 
 public class RecordAlreadyExist extends RuntimeException{
     public RecordAlreadyExist(String message) {

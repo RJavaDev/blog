@@ -1,14 +1,22 @@
 package uz.blog.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import uz.blog.entity.Comment;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import uz.blog.entity.CommentEntity;
 
 import java.util.List;
 
-public interface CommentRepository extends JpaRepository<Comment, Integer> {
-    List<Comment> getCommentByBlogId(Integer id);
+public interface CommentRepository extends JpaRepository<CommentEntity, Integer> {
 
-    List<Comment> getUnverifiedComments();
+    @Query(value = "SELECT blogc.* FROM blog_comment blogc INNER JOIN blog b ON blogc.blog_id = b.id WHERE b.id=:blogId", nativeQuery = true)
+    List<CommentEntity> getCommentByBlogId(@Param("blogId") Integer blogId);
 
-    void confirmationComment();
+    @Query(value = "SELECT blogc.* FROM blog_comment blogc WHERE checked = false",nativeQuery = true)
+    List<CommentEntity> getUnverifiedComments();
+
+    @Modifying
+    @Query(value = "UPDATE blog_comment SET checked = true WHERE id = :commentId AND status <> 'DELETED'", nativeQuery = true)
+    void confirmationComment(@Param("commentId") Integer commentId);
 }

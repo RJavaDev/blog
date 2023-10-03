@@ -2,9 +2,11 @@ package uz.blog.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uz.blog.dto.request.CommentCreatedRequestDto;
-import uz.blog.entity.Comment;
+import org.springframework.transaction.annotation.Transactional;
+import uz.blog.entity.BlogEntity;
+import uz.blog.entity.CommentEntity;
 import uz.blog.repository.CommentRepository;
+import uz.blog.validation.CommonSchemaValidation;
 
 import java.util.List;
 
@@ -14,20 +16,28 @@ public class CommentService {
 
     private final CommentRepository repository;
 
-    public List<Comment> getCommentListByBlogId(Integer id) {
+    private final CommonSchemaValidation validation;
+
+    public List<CommentEntity> getCommentListByBlogId(Integer id) {
         return repository.getCommentByBlogId(id);
     }
 
-    public boolean add(Integer id, CommentCreatedRequestDto dto) {
-        return false;
+    public boolean add(Integer id, CommentEntity comment) {
+
+        BlogEntity blogById = validation.getBlogById(id);
+        comment.setBlog(blogById);
+        repository.save(comment);
+
+        return true;
     }
 
-    public List<Comment> getUnverifiedCommentList() {
+    public List<CommentEntity> getUnverifiedCommentList() {
        return repository.getUnverifiedComments();
     }
 
-    public void confirmationComment() {
-        repository.confirmationComment();
+    @Transactional
+    public void confirmationComment(Integer commentId) {
+        repository.confirmationComment(commentId);
     }
 
     public void delete(Integer id) {

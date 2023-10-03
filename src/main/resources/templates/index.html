@@ -1,10 +1,77 @@
-
-<html lang="en">
+<!DOCTYPE html>
+<html lang="eng"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+
+    <title>Product</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap"
+            rel="stylesheet" />
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
+    <script src="https://cdn.tailwindcss.com/3.3.0"></script>
 </head>
 <body>
-<h1>Hallo</h1>
+<div class="container mx-auto md:px-6">
+    <div class="my-2">
+        <a th:href="@{/blog/add}"  class="underline hover:text-blue-600" style="cursor: pointer">addb log</a>
+    </div>
+    <div class="flex flex-col">
+        <div class="overflow-x-auto">
+            <div class="inline-block min-w-full">
+                <div class="overflow-hidden border-t border-r border-l">
+                    <table class="min-w-full text-center text-sm font-light">
+                        <thead class="border-b font-medium dark:border-neutral-500">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Topic</th>
+                            <th scope="col">Text</th>
+                            <th scope="col">Number Of Readings</th>
+                            <th scope="col">checked</th>
+                            <th scope="col">Created At</th>
+                            <th scope="col">Updated At</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="item : ${blogs}" class="border-b dark:border-neutral-500">
+                            <td class="whitespace-nowrap font-medium" th:text="${item.getId()}"></td>
+                            <td class="whitespace-nowrap" th:text="${item.getTitle()}"></td>
+                            <td class="whitespace-nowrap" th:text="${item.getTopic()}"></td>
+                            <td class="whitespace-nowrap" th:text="${item.getText()}"></td>
+                            <td class="whitespace-nowrap" th:text="${item.getNumberOfReadings()}"></td>
+                            <td class="whitespace-nowrap" th:text="${item.isChecked()}"></td>
+                            <td class="whitespace-nowrap" th:text="${item.getCreatedDate()}"></td>
+                            <td class="whitespace-nowrap" th:text="${item.getUpdatedDate()}"></td>
+                            <td class="whitespace-nowrap">
+<!--                                <a th:href="@{/incoming-product/edit/{id}(id=${incomingProductItem.getId()})}"-->
+<!--                                   class="underline mr-1 hover:text-blue-600">edit</a>-->
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            fontFamily: {
+                sans: ["Roboto", "sans-serif"],
+                body: ["Roboto", "sans-serif"],
+                mono: ["ui-monospace", "monospace"],
+            },
+        },
+        corePlugins: {
+            preflight: false,
+        },
+    };
+</script>
 </body>
 </html>

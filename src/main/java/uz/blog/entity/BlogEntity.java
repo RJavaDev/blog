@@ -6,6 +6,7 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import uz.blog.constants.TableNames;
+import uz.blog.dto.response.BlogResponseDto;
 import uz.blog.entity.base.BaseServerModifierEntity;
 
 
@@ -25,5 +26,10 @@ public class BlogEntity extends BaseServerModifierEntity {
     private Integer numberOfReadings;
 
     private boolean checked;
+
+    public BlogResponseDto toDto(String... ignoreProperties){
+        return toDto(this, new BlogResponseDto(), ignoreProperties);
+    }
+
 
 }
