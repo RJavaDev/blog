@@ -1,6 +1,6 @@
 # Blog Project
 
-The goal of this project is to create a blog using Java, Spring Boot 3, 
+The goal of this project is to create a blog using Java 17, Spring Boot 3, 
 Spring Security, Spring Data JPA, PostgreSQL, Thymeleaf, Thymeleaf Security
 and TailwindCSS for a beautiful design.
 
