@@ -7,7 +7,6 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import uz.blog.constants.TableNames;
-import uz.blog.dto.response.BlogResponseDto;
 import uz.blog.dto.response.CommentResponseDto;
 import uz.blog.entity.base.BaseServerModifierEntity;
 

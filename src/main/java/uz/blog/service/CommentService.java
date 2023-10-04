@@ -31,8 +31,8 @@ public class CommentService {
         return true;
     }
 
-    public List<CommentEntity> getUnverifiedCommentList() {
-       return repository.getUnverifiedComments();
+    public List<CommentEntity> getUnverifiedCommentList(Integer id, Boolean isUnverified) {
+       return repository.getUnverifiedComments(id, isUnverified);
     }
 
     @Transactional
