@@ -21,7 +21,7 @@ public class UserService implements BaseService<UserEntity, UserRequestDto> {
     public boolean add(UserRequestDto userRequestDto) {
         Optional<UserEntity> optionalUserEntity = userRepository.findByUsername(userRequestDto.getUsername());
         if (optionalUserEntity.isPresent()) {
-            throw new RecordNotFountException(userRequestDto.getUsername() + " there is a user at this email address");
+            throw new RecordNotFountException(userRequestDto.getUsername() + " there is a user at this username");
         }
         UserEntity user = UserEntity.of(userRequestDto);
         user.forCreate();

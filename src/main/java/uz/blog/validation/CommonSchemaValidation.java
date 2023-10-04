@@ -3,7 +3,6 @@ package uz.blog.validation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import uz.blog.entity.BlogEntity;
-import uz.blog.entity.CommentEntity;
 import uz.blog.repository.BlogRepository;
 import uz.blog.repository.CommentRepository;
 import uz.blog.repository.UserRepository;
@@ -18,7 +17,7 @@ public class CommonSchemaValidation {
 
     private final CommentRepository commentRepository;
 
-    public void existsById(Integer id) {
+    public void existsBlogById(Integer id) {
 
        getBlogById(id);
 
@@ -30,6 +29,12 @@ public class CommonSchemaValidation {
             throw new NullPointerException(id + " not found");
         });
 
+    }
+
+    public void existsCommentById(Integer id){
+        commentRepository.findById(id).orElseThrow(()->{
+            throw new NullPointerException();
+        });
     }
 
 

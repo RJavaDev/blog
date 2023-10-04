@@ -15,10 +15,9 @@ import uz.blog.utils.SecurityUtils;
 @RequestMapping("/")
 public class HomeController {
 
-    @GetMapping("/")
-    public ModelAndView home(ModelAndView modelAndView){
-        modelAndView.setViewName("home");
-        return modelAndView;
+    @GetMapping("")
+    public String home(){
+        return "home";
     }
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("/account")

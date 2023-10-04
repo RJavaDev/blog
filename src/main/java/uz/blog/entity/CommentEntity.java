@@ -23,9 +23,9 @@ public class CommentEntity extends BaseServerModifierEntity {
     @Column(length = 400)
     private String comment;
 
-    private Integer useful;
+    private long useful;
 
-    private Integer notUseful;
+    private long notUseful;
 
     private boolean checked;
 

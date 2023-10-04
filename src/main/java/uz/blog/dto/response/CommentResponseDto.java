@@ -12,9 +12,9 @@ public class CommentResponseDto extends BaseServerModifierDto {
 
     private String comment;
 
-    private Integer useful;
+    private long useful;
 
-    private Integer notUseful;
+    private long notUseful;
 
     private boolean checked;
 

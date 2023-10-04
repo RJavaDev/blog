@@ -23,8 +23,4 @@ public class UserDto extends BaseServerModifierDto {
     private String username;
 
     private List<RoleEnum> roleEnumList;
-    public UserEntity toEntity( String... ignoreProperties) {
-        return super.toEntity(this, new UserEntity(), ignoreProperties);
-    }
-
 }

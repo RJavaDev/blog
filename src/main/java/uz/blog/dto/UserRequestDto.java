@@ -18,9 +18,4 @@ public class UserRequestDto {
     private String phoneNumber;
     private String roles;
 
-    @JsonIgnore
-    public boolean isUser() {
-        return roles == null ;
-    }
-
 }

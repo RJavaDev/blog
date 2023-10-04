@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface BlogRepository extends JpaRepository<BlogEntity, Integer> {
 
-    @Query(value = "SELECT b.* FROM blog b WHERE b.status <> 'DELETED'", nativeQuery = true)
+    @Query(value = "SELECT b.* FROM blog b WHERE b.status <> 'DELETED' ORDER BY b.id", nativeQuery = true)
     List<BlogEntity> getAllBlog();
 
     @Query(value = "SELECT b.* FROM blog b WHERE b.id =:blogId AND b.status <> 'DELETED'", nativeQuery = true)

@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import uz.blog.entity.BlogEntity;
 import uz.blog.entity.CommentEntity;
 import uz.blog.repository.CommentRepository;
+import uz.blog.utils.SecurityUtils;
 import uz.blog.validation.CommonSchemaValidation;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class CommentService {
 
         BlogEntity blogById = validation.getBlogById(id);
         comment.setBlog(blogById);
+        comment.forCreate(SecurityUtils.getUserId());
         repository.save(comment);
 
         return true;
@@ -37,10 +39,25 @@ public class CommentService {
 
     @Transactional
     public void confirmationComment(Integer commentId) {
+        validation.existsCommentById(commentId);
         repository.confirmationComment(commentId);
     }
 
+    @Transactional
     public void delete(Integer id) {
+        validation.existsCommentById(id);
         repository.deleteById(id);
+    }
+
+    @Transactional
+    public void usefulIncrement(Integer id) {
+        validation.existsCommentById(id);
+        repository.usefulIncrement(id);
+    }
+
+    @Transactional
+    public void notUsefulIncrement(Integer id) {
+        validation.existsCommentById(id);
+        repository.notUsefulIncrement(id);
     }
 }

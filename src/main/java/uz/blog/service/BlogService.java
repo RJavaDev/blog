@@ -38,7 +38,7 @@ public class BlogService {
 
     @Transactional
     public boolean delete(Integer id) {
-        validation.existsById(id);
+        validation.existsBlogById(id);
         repository.deleteBlogById(id);
         return false;
     }
@@ -49,7 +49,7 @@ public class BlogService {
 
     @Transactional
     public void checkedBlog(Integer id) {
-        validation.existsById(id);
+        validation.existsBlogById(id);
         repository.checkedBlog(id);
     }
 }

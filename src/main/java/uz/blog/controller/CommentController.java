@@ -37,7 +37,7 @@ public class CommentController {
     }
 
     @GetMapping("/get-unverified/{id}")
-    public ModelAndView getUnverifiedCommentList(ModelAndView view,@RequestParam("isUnverified") Boolean isUnverified, @PathVariable Integer id) {
+    public ModelAndView getUnverifiedCommentList(ModelAndView view, @RequestParam("isUnverified") Boolean isUnverified, @PathVariable Integer id) {
         List<CommentEntity> commentEntityList = service.getUnverifiedCommentList(id, isUnverified);
         view.addObject("commentList", commentEntityList);
         view.addObject("isUnverified", isUnverified);
@@ -45,18 +45,27 @@ public class CommentController {
         view.setViewName("show-comment");
         return view;
     }
-
-    @PostMapping("/confirmation/{id}")
-    public ModelAndView confirmationComment(@PathVariable Integer id, ModelAndView view) {
-        service.confirmationComment(id);
-        view.setViewName("comment");
-        return view;
+    @PostMapping("/useful-increment/{id}")
+    public String usefulIncrement(@PathVariable Integer id, @RequestParam("blogId") Integer blogId){
+        service.usefulIncrement(id);
+        return "redirect:/comment/get-blog-comments/" + blogId;
     }
 
-    @DeleteMapping("delete/{id}")
-    public ModelAndView delete(@PathVariable Integer id, ModelAndView view) {
+    @PostMapping("/not-useful-increment/{id}")
+    public String notUsefulIncrement(@PathVariable Integer id, @RequestParam("blogId") Integer blogId){
+        service.notUsefulIncrement(id);
+        return "redirect:/comment/get-blog-comments/" + blogId;
+    }
+
+    @PostMapping("/confirmation/{id}")
+    public String confirmationComment(@PathVariable Integer id, @RequestParam("blogId") Integer blogId) {
+        service.confirmationComment(id);
+        return "redirect:/comment/get-blog-comments/" + blogId;
+    }
+
+    @PostMapping("delete/{id}")
+    public String delete(@PathVariable Integer id, @RequestParam("blogId") Integer blogId) {
         service.delete(id);
-        view.setViewName("comment");
-        return view;
+        return "redirect:/comment/get-blog-comments/" + blogId;
     }
 }

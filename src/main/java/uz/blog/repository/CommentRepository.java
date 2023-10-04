@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface CommentRepository extends JpaRepository<CommentEntity, Integer> {
 
-    @Query(value = "SELECT blogc.* FROM blog_comment blogc INNER JOIN blog b ON blogc.blog_id = b.id WHERE b.id=:blogId", nativeQuery = true)
+    @Query(value = "SELECT blogc.* FROM blog_comment blogc INNER JOIN blog b ON blogc.blog_id = b.id WHERE b.id=:blogId ORDER BY blogc.id", nativeQuery = true)
     List<CommentEntity> getCommentByBlogId(@Param("blogId") Integer blogId);
 
     @Query(value = "SELECT blogc.* FROM blog_comment blogc " +
@@ -22,4 +22,12 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Integer>
     @Modifying
     @Query(value = "UPDATE blog_comment SET checked = true WHERE id = :commentId AND status <> 'DELETED'", nativeQuery = true)
     void confirmationComment(@Param("commentId") Integer commentId);
+
+    @Modifying
+    @Query(value = "UPDATE blog_comment SET useful = useful+1 WHERE id = :commentId AND status <> 'DELETED'", nativeQuery = true)
+    void usefulIncrement(@Param("commentId") Integer commentId);
+
+    @Modifying
+    @Query(value = "UPDATE blog_comment SET not_useful = not_useful+1 WHERE id = :commentId AND status <> 'DELETED'", nativeQuery = true)
+    void notUsefulIncrement(@Param("commentId") Integer commentId);
 }

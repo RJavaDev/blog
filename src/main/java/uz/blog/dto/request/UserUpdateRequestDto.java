@@ -19,8 +19,4 @@ public class UserUpdateRequestDto extends BaseUserDto {
 
     private String password;
 
-    public UserEntity toEntity(String... ignoreProperties) {
-        return super.toEntity(this, new UserEntity(), ignoreProperties);
-    }
-
 }
