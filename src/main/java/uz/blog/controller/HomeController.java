@@ -19,6 +19,7 @@ public class HomeController {
     public String home(){
         return "home";
     }
+
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("/account")
     public ModelAndView get(ModelAndView modelAndView){

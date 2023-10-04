@@ -23,6 +23,16 @@ import uz.blog.service.AuthService;
 public class SecurityConfig {
     private final AuthService authService;
 
+    private static final String[] WHITE_LIST = new String[]{
+            "/*",
+            "/component/**",
+            "/view/**",
+            "/blog",
+            "/blog/get/*",
+            "/comment/get-blog-comments/*",
+            "/comment/get-unverified/*",
+    };
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -33,9 +43,8 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/*").permitAll()
-                .requestMatchers("/component/**").permitAll()
-                .requestMatchers("/view/**").permitAll()
+                .requestMatchers(WHITE_LIST)
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

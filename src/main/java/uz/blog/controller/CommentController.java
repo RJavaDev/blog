@@ -2,6 +2,7 @@ package uz.blog.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -57,12 +58,14 @@ public class CommentController {
         return "redirect:/comment/get-blog-comments/" + blogId;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/confirmation/{id}")
     public String confirmationComment(@PathVariable Integer id, @RequestParam("blogId") Integer blogId) {
         service.confirmationComment(id);
         return "redirect:/comment/get-blog-comments/" + blogId;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("delete/{id}")
     public String delete(@PathVariable Integer id, @RequestParam("blogId") Integer blogId) {
         service.delete(id);

@@ -14,7 +14,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BlogService {
 
-
     private final BlogRepository repository;
 
     private final CommonSchemaValidation validation;

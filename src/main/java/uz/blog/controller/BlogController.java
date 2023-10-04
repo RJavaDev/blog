@@ -2,6 +2,7 @@ package uz.blog.controller;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +40,6 @@ public class BlogController {
         return "add-blog";
     }
 
-//    @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     @PostMapping("/add")
     public String addBlog(@ModelAttribute @Validated BlogCreatedRequestDto dto, Model model) {
         BlogEntity blogEntity = BlogConvert.convertToEntity(dto);
@@ -59,6 +59,7 @@ public class BlogController {
         return view;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/checked/{id}")
     public ModelAndView checkedBlog(@PathVariable Integer id, ModelAndView view) {
 
@@ -67,6 +68,7 @@ public class BlogController {
         return view;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/delete/{id}")
     public String deleteBlog(@PathVariable Integer id){
 

@@ -22,7 +22,9 @@
   <div class="form">
     <div class="btn">
       <button class="signUpBtn">SIGN UP</button>
-      <button class="loginBtn">LOG IN</button>
+      <button
+              th:style="${userLogin==null?'display:none':'display:inline-block'}"
+              class="loginBtn">LOG IN</button>
     </div>
     <form class="signUp" action="" method="post" th:action="@{/register}">
       <div class="formGroup">

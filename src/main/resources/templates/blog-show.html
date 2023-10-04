@@ -55,6 +55,7 @@
         </button>
 
         <button sec:authorize="hasRole('ADMIN')"
+                th:style="${blog.isChecked()==true?'display:none':'display:inline-block'}"
                 type="button"
                 data-te-ripple-init>
             <a th:href="@{/blog/checked/{id}(id=${blog.getId()})}"
@@ -62,7 +63,8 @@
             >Checked</a>
         </button>
 
-        <button style="font-size: 15px; position: absolute; right:260px; bottom: 25px;"
+        <button sec:authorize="hasRole('ADMIN')"
+                style="font-size: 15px; position: absolute; right:260px; bottom: 25px;"
                 type="submit"
                 data-te-ripple-init>
             <a th:href="@{/blog/delete/{id}(id=${blog.getId()})}"
