@@ -20,6 +20,8 @@ The project is designed for testing. You can now test the project by following t
 3. Below each blog post, you can leave comments.
 4. Save a blog post by clicking the "Create" button at the bottom of the post.
 
+### default ADMIN(username:admin,password:123) creates a flyway
+
 ## Design
 
 The design is achieved using Tailwind CSS code snippets. The CSS styles are located in the `styles.css` file.
