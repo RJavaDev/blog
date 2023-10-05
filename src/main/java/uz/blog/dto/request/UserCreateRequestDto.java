@@ -4,8 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import uz.blog.dto.base.BaseServerModifierDto;
-import uz.blog.entity.UserEntity;
+import uz.blog.dto.base.BaseDto;
 
 import jakarta.validation.constraints.NotBlank;
 
@@ -13,7 +12,7 @@ import jakarta.validation.constraints.NotBlank;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserCreateRequestDto extends BaseServerModifierDto {
+public class UserCreateRequestDto extends BaseDto {
 
     @NotBlank(message = "firstname must not be null!!!")
     private String firstname;
@@ -27,8 +26,5 @@ public class UserCreateRequestDto extends BaseServerModifierDto {
     @NotBlank(message = "password must not be null!!!")
     private String password;
 
-    public UserEntity toEntity(String... ignoreProperties) {
-        return super.toEntity(this, new UserEntity(), ignoreProperties);
-    }
 
 }

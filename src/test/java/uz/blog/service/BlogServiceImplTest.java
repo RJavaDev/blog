@@ -3,7 +3,7 @@ package uz.blog.service;
 import org.junit.jupiter.api.Test;
 import uz.blog.entity.BlogEntity;
 import uz.blog.repository.BlogRepository;
-import uz.blog.utils.SecurityUtils;
+import uz.blog.service.Base.BlogService;
 import uz.blog.validation.CommonSchemaValidation;
 
 import java.util.Optional;
@@ -11,7 +11,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class BlogServiceTest {
+class BlogServiceImplTest {
 
     @Test
     void add() {
@@ -19,14 +19,14 @@ class BlogServiceTest {
         BlogRepository repository = mock(BlogRepository.class);
         CommonSchemaValidation validation = mock(CommonSchemaValidation.class);
 
-        BlogService blogService = new BlogService(repository,validation);
+        BlogService blogServiceImpl = new BlogServiceImpl(repository,validation);
 
         BlogEntity newBlog = new BlogEntity();
         newBlog.setTitle("Sample Title");
         newBlog.setTopic("Sample Topic");
         newBlog.setText("Sample Text");
 
-        boolean result = blogService.add(newBlog);
+        boolean result = blogServiceImpl.add(newBlog);
 
         verify(repository).save(newBlog);
         assertTrue(result);
@@ -38,7 +38,7 @@ class BlogServiceTest {
 
         BlogRepository repository = mock(BlogRepository.class);
         CommonSchemaValidation validation = mock(CommonSchemaValidation.class);
-        BlogService blogService = new BlogService(repository,validation);
+        BlogService blogServiceImpl = new BlogServiceImpl(repository,validation);
 
         int blogId = 1;
         BlogEntity blogEntity = new BlogEntity();
@@ -46,7 +46,7 @@ class BlogServiceTest {
 
         when(repository.getBlogById(blogId)).thenReturn(Optional.of(blogEntity));
 
-        BlogEntity result = blogService.getObject(blogId);
+        BlogEntity result = blogServiceImpl.getObject(blogId);
 
         verify(repository).incrementNumberReadings(blogId);
         assertNotNull(result);

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import uz.blog.controller.convert.BlogConvert;
 import uz.blog.dto.response.BlogResponseDto;
 import uz.blog.entity.BlogEntity;
-import uz.blog.service.BlogService;
+import uz.blog.service.Base.BlogService;
 import uz.blog.dto.request.BlogCreatedRequestDto;
 
 import java.util.List;

@@ -7,14 +7,14 @@ import lombok.Getter;
 import lombok.Setter;
 import uz.blog.constants.TableNames;
 import uz.blog.dto.response.BlogResponseDto;
-import uz.blog.entity.base.BaseServerModifierEntity;
+import uz.blog.entity.base.BaseEntity;
 
 
 @Getter
 @Setter
 @Entity
 @Table(name = TableNames.BLOG)
-public class BlogEntity extends BaseServerModifierEntity {
+public class BlogEntity extends BaseEntity {
 
     private String title;
 
@@ -30,6 +30,5 @@ public class BlogEntity extends BaseServerModifierEntity {
     public BlogResponseDto toDto(String... ignoreProperties){
         return toDto(this, new BlogResponseDto(), ignoreProperties);
     }
-
 
 }

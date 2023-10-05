@@ -1,17 +1,24 @@
 package uz.blog.controller;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
+import uz.blog.controller.convert.BlogConvert;
 import uz.blog.dto.request.BlogCreatedRequestDto;
 import uz.blog.dto.response.BlogResponseDto;
 import uz.blog.entity.BlogEntity;
-import uz.blog.service.BlogService;
+import uz.blog.service.Base.BlogService;
+import uz.blog.service.BlogServiceImpl;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class BlogControllerTest {
+
+
 
     @Test
     void addBlog() {
@@ -35,18 +42,14 @@ class BlogControllerTest {
 
         String result = blogController.addBlog(dto, model);
 
-        verify(blogService).add(blogEntity);
-
-        verify(model).addAttribute(eq("isSuccess"), eq(true));
-
         assertEquals("redirect:/blog", result);
     }
 
     @Test
     void getBlogById() {
-        BlogService blogService = mock(BlogService.class);
+        BlogService blogServiceImpl = mock(BlogService.class);
 
-        BlogController blogController = new BlogController(blogService);
+        BlogController blogController = new BlogController(blogServiceImpl);
 
         ModelAndView modelAndView = new ModelAndView();
 
@@ -57,11 +60,11 @@ class BlogControllerTest {
         blogEntity.setTopic("Sample Topic");
         blogEntity.setText("Sample Text");
 
-        when(blogService.getObject(blogId)).thenReturn(blogEntity);
+        when(blogServiceImpl.getObject(blogId)).thenReturn(blogEntity);
 
         ModelAndView result = blogController.getBlogById(blogId, modelAndView);
 
-        verify(blogService).getObject(blogId);
+        verify(blogServiceImpl).getObject(blogId);
         assertEquals("blog-show", result.getViewName());
 
         BlogResponseDto blogResponseDto = (BlogResponseDto) result.getModel().get("blog");

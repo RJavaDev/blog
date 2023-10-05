@@ -110,7 +110,7 @@
                 <h5 class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
                     comment
                 </h5>
-                <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200" th:text="${comment.getComment()}">
+                <p class="mb-4 pt-3 pb-3 text-base text-neutral-600 dark:text-neutral-200" th:text="${comment.getComment()}">
                 </p>
                 <div sec:authorize="hasRole('ADMIN')">
                     <form class="inline-block rounded-full border-danger"
@@ -202,7 +202,7 @@
                 <label
                         class="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                         for="radioDefault01">
-                    Unverified
+                    Verified
                 </label>
             </div>
 
@@ -217,7 +217,7 @@
                 <label
                         class="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                         for="radioDefault03">
-                    Not Unverified
+                    Unverified
                 </label>
             </div>
             <button

@@ -1,4 +1,4 @@
-package uz.blog.entity.role;
+package uz.blog.constants;
 
 public enum RoleEnum {
     USER,

@@ -2,11 +2,11 @@ package uz.blog.dto.response;
 
 import lombok.Getter;
 import lombok.Setter;
-import uz.blog.dto.base.BaseServerModifierDto;
+import uz.blog.dto.base.BaseDto;
 
 @Getter
 @Setter
-public class BlogResponseDto extends BaseServerModifierDto {
+public class BlogResponseDto extends BaseDto {
 
     private String title;
 

@@ -10,7 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 import uz.blog.controller.convert.CommentConvert;
 import uz.blog.dto.request.CommentCreatedRequestDto;
 import uz.blog.entity.CommentEntity;
-import uz.blog.service.CommentService;
+import uz.blog.service.Base.CommentService;
+import uz.blog.service.CommentServiceImpl;
 
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class CommentController {
     @PostMapping("/add/{id}")
     public String addBlog(@ModelAttribute @Valid CommentCreatedRequestDto dto, Model model, @PathVariable Integer id) {
         CommentEntity commentEntity = CommentConvert.convertToEntity(dto);
-        boolean add = service.add(id, commentEntity);
+        boolean add = service.addCommentByBlogId(id, commentEntity);
         model.addAttribute("isSuccess", add);
         return "redirect:/comment/get-blog-comments/" + id;
     }

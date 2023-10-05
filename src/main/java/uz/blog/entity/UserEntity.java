@@ -6,9 +6,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import uz.blog.constants.TableNames;
-import uz.blog.dto.UserRequestDto;
-import uz.blog.entity.base.BaseServerModifierEntity;
-import uz.blog.entity.role.RoleEnum;
+import uz.blog.dto.request.UserRequestDto;
+import uz.blog.entity.base.BaseEntity;
+import uz.blog.constants.RoleEnum;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,7 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = TableNames.BLOG_USER)
-public class UserEntity extends BaseServerModifierEntity implements UserDetails {
+public class UserEntity extends BaseEntity implements UserDetails {
 
     private String firstname;
 

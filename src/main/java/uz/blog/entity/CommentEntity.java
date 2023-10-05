@@ -8,14 +8,14 @@ import lombok.Getter;
 import lombok.Setter;
 import uz.blog.constants.TableNames;
 import uz.blog.dto.response.CommentResponseDto;
-import uz.blog.entity.base.BaseServerModifierEntity;
+import uz.blog.entity.base.BaseEntity;
 
 
 @Getter
 @Setter
 @Entity
 @Table(name = TableNames.BLOG_COMMENT)
-public class CommentEntity extends BaseServerModifierEntity {
+public class CommentEntity extends BaseEntity {
 
     @ManyToOne
     private BlogEntity blog;

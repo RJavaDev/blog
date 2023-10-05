@@ -5,9 +5,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import uz.blog.entity.UserEntity;
 import uz.blog.common.exception.RecordNotFountException;
-import uz.blog.dto.UserRequestDto;
+import uz.blog.dto.request.UserRequestDto;
 import uz.blog.repository.UserRepository;
-import uz.blog.service.Base.BaseService;
 
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package uz.blog.dto;
+package uz.blog.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
